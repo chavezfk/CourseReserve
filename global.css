@@ -1,0 +1,49 @@
+body {
+      margin: 0.5in 1in;
+      font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+      color: #333;
+    }
+    
+div {
+    padding-bottom: 0.25in;
+}
+#form {
+    width:60%;
+}
+#book table {
+    border: 1px solid black;
+    width: 100%;
+}
+#book table td select{
+    width: 100%;
+}
+#book table td{
+    width: 20%;
+    border: 1px solid black;
+}
+
+#general table td input{
+    width: 200px;
+}
+#general table td .radio{
+    width: 50px;
+    padding-right: 10px;
+}
+#semester_year input{
+    width: 75px;
+    text-align:center;
+}
+#books input {
+    width: 100%;
+}
+
+#title, #author {
+    width: 25%;
+}
+
+#addButton{
+    float: left;
+}
+#submitButton{
+    float: right;
+}

@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <title>Skeen Library Course Reservation Form</title>
+    <link rel="stylesheet" type="text/css" href="global.css" />
+    
+    
+</head>
+
+<body>
+    <img style="float:right" src="Logo.PNG"/>
+    
+    <h1 style="clear: both">Skeen Library Course Reservation Request Form</h1>
+    <p>Skeen Library allows the reservation of books for a particular class. The form must be completed by instructor of the course.  
+    Please provide the information requested in this form to request a reservation of supplies. 
+    </p>
+    
+    <p>You can view our catalog to collect the required information <a href="http://infohost.nmt.edu/~nmtlib/" target="_blank"> here </a>.</p>
+    
+    <form>
+    <div id="form" action="register.php">
+        <h4>General Information:</h4>
+        <div id="semester_year">
+            <label for="semester" class="required">Semester:</label>
+            <select name="semester">
+                <option value="Spring">Spring</option>
+                <option value="Fall">Fall</option>
+            </select>
+            
+            <label for="semester" class="required">Year:</label>
+            <input type="number" name="year" id="year" value="2017"/>
+        
+        </div>
+        <div id="general">
+            <table>
+                <tr>
+                    <td><label for="name" class="required">Professor Name:</label></td>
+                </tr>
+                <tr>
+                    <td><label for="first" class="required">First:</label></td>
+                    <td><label for="last" class="required">Last:</label></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="first" id="first"/></td>
+                    <td><input type="text" name="last" id="last"/></td>
+                </tr>
+                <tr>
+                    <td><label for="phone" class="required">Phone:</label></td>
+                    <td><input type="text" name="phone" id="phone"/></td>
+                </tr>
+                <tr>
+                    <td><label for="email" class="required">Email:</label></td>
+                    <td><input type="text" name="email" id="email"/></td>
+                </tr>
+                <tr>
+                    <td><label for="course_num" class="required">Course #:</label></td>
+                    <td><input type="text" name="course_num" id="course_num"/></td>
+                </tr>
+                <tr>
+                    <td><label for="course_name" class="required">Course Name:</label></td>
+                    <td><input type="text" name="course_name" id="course_name"/></td>
+                </tr>
+
+            </table>
+            <table>
+                <tr>
+                    <td><label for="loan_time" class="required">Loan Time: </label></td>
+                </tr>
+                <tr>
+                    <td id="loan_time">
+                        <input type="radio" class="radio" name="2hr">2HR</input>
+                        <input type="radio" class="radio" name="4hr">4HR</input>
+                        <input type="radio" class="radio" name="12hr">12HR/Overnight</input>
+                        <input type="radio" class="radio" name="2 weeks">2 Weeks</input>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        <h4>Book Information: </h4>
+        <p>If you do not know all the information, please enter at least two fields. Valid examples include: title and author, title and call number, or call number and author.</p>
+        <div id="book">
+            <table id="books" name="books_table">
+                <th>Barcode</th>
+                <th>Title</th>
+                <th>Call #</th>
+                <th>Author </th>
+                <th>Owner</th>
+                <tr>
+                    <td id="barcode" name="barcode 1"><input type="text" /></td>
+                    <td id="title" name="title 1"><input type="text" /></td>
+                    <td id="call_num" name="call_num 1"><input type="text" /></td>
+                    <td id="author" name="author 1"><input type="text" /></td>
+                    <td id="owner" name="owner 1"><select name="owner"><option>Library</option><option>Self</option></select></td>
+                </tr>
+            </table>
+            <div id="add">
+                <button id="addButton" onclick="javascript:addItem()">Add Item</button>
+            </div>
+            <div id="submit">
+                <button id="submitButton" onclick="javascript:clickSubmit()">Submit</button>
+            </div>
+       </div> 
+    </div>
+    </form>
+</body>
+
+</html>
