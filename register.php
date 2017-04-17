@@ -7,6 +7,16 @@ function read_template($filename) {
     return ob_get_clean();
 }
 
+function getLoanTime() {
+    $names = array('2hr','4hr','12hr','2 weeks');
+    foreach($names as $c){
+        if(isset($_POST[$c])) {
+            return $c;
+        }
+    }
+
+}
+
 //called if reccurence is chosen
 /*function makeRecurrenceString() {
     $days = array_map('ucfirst', array_keys($_POST['days']));
@@ -55,7 +65,7 @@ function create_google_sheet_entry(){
     $spreadsheetId = '1mcvjpbbYtlTnErwic3pbMQoUDO4Fkmy_KRj7_xS1g0o';
     
     //NOTE: REPLACE RANGE NAME WITH CORRECT SHEET NAME 
-    $range = $_POST['semester'].' '.$_POST['year'].' Contacts:A1';
+    $range = $_POST['semester'].' '.$_POST['year'].' Contacts!A1';
     $valueInputOption = 'USER_ENTERED';
     
     $values = array(
@@ -83,9 +93,11 @@ function create_google_sheet_entry(){
         
     //push the table information next
     
-    $range = $_POST['semester'].' '.$_POST['year'].' Reservations:H1';
+    $range = $_POST['semester'].' '.$_POST['year'].' Reservations!H1';
     $valueInputOption = 'USER_ENTERED';
     
+    $loanTime = getLoanTime();
+
     $values = array(
     array(
         $_POST['last'],
@@ -95,7 +107,7 @@ function create_google_sheet_entry(){
         $_POST['title'],
         $_POST['call_num'],
         $_POST['author'],
-        join(", ", array_map('ucfirst', array_keys($_POST['loan_time']))),
+        $loanTime,
         $_POST['owner'],
         
     ),
