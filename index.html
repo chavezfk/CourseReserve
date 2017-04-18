@@ -15,7 +15,6 @@
     Please provide the information requested in this form to request a reservation of supplies. 
     </p>
     
-    <p>You can view our catalog to collect the required information <a href="http://infohost.nmt.edu/~nmtlib/" target="_blank"> here </a>.</p>
     
     <form method="post" action="register.php">
     <div id="form" method="post" action="register.php">
@@ -79,6 +78,8 @@
         </div>
         <h4>Book Information: </h4>
         <p>If you do not know all the information, please enter at least two fields. Valid examples include: title and author, title and call number, or call number and author.</p>
+        <p>You can view our catalog to collect the required information <a href="http://infohost.nmt.edu/~nmtlib/" target="_blank"> here </a>.</p>
+    
         <div id="book">
             <table id="books" name="books_table">
                 <th>Barcode</th>
@@ -91,7 +92,12 @@
                     <td id="title" name="title 1"><input type="text" /></td>
                     <td id="call_num" name="call_num 1"><input type="text" /></td>
                     <td id="author" name="author 1"><input type="text" /></td>
-                    <td id="owner" name="owner 1"><select name="owner"><option>Library</option><option>Self</option></select></td>
+                    <td id="owner" name="owner 1">
+                        <select id="owner_slect" name="owner" onselect="javascript:checkSelection()">
+                            <option>Library</option>
+                            <option>Self</option>
+                        </select>
+                    </td>
                 </tr>
             </table>
             <div id="add">
@@ -102,8 +108,15 @@
             </div>
        </div> 
     </div>
-<input type="submit">submit</input>
+<input type="submit"/>
     </form>
+    
+    <script type="text/javascript">
+        function checkSelection() {
+            var select = document.getElementByID("owner_select");
+            if(select.value() === "Self")alert("No!");
+        }
+    </script>
 </body>
 
 </html>
