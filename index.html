@@ -10,7 +10,7 @@
 <body>
     <script type="text/javascript">
         function checkSelect() {
-            var select = document.getElementsByName("owner");
+            var select = document.getElementsByName("owner[]");
             for( var c = 0; c < select.length; c++){
                 if(select[c].value === "Self"){
                         document.getElementById("personal-warning").style.display = "block";
@@ -22,9 +22,22 @@
         }
         
         function addItem() {
-        
+            var row = document.createElement("tr");
+            row.insertCell(-1).innerHTML = '<input type="text" name="barcode[]"/>';
+            row.insertCell(-1).innerHTML = '<input type="text" name="title[]"/>';
+            row.insertCell(-1).innerHTML = '<input type="text" name="call_num[]"/>';
+            row.insertCell(-1).innerHTML = '<input type="text" name="author[]"/>';
+            row.insertCell(-1).innerHTML = '<select id="select" name="owner[]" onchange="javascript:checkSelect()"><option>Library</option><option>Self</option></select>';
+            
+            document.getElementById("items").appendChild(row);
         }
         
+        function removeItem() {
+            var item = document.getElementById("items").lastElementChild;
+            alert(item.nodeName + " " + item.id);
+            if(item.nodeName != "TBODY")
+                document.getElementById("items").removeChild(item);
+        }
         function checkSubmit() {
             
         }
@@ -115,26 +128,15 @@
         our staff will follow normal billing processes. 
         </h4>
         
-        <div id="book">
-            <table id="books">
+        <div id="data">
+            <table id="items">
                 <th>Barcode</th>
                 <th>Title</th>
                 <th>Call #</th>
                 <th>Author </th>
                 <th>Owner</th>
-                <tr>
-                    <td ><input type="text" name="barcode[]"/></td>
-                    <td ><input type="text" name="title[]"/></td>
-                    <td ><input type="text" name="call_num[]"/></td>
-                    <td ><input type="text" name="author[]"/></td>
-                    <td>
-                        <select id="select" name="owner[]" onchange="javascript:checkSelect()">
-                            <option>Library</option>
-                            <option>Self</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
+                
+                <tr id="first">
                     <td ><input type="text" name="barcode[]"/></td>
                     <td ><input type="text" name="title[]"/></td>
                     <td ><input type="text" name="call_num[]"/></td>
@@ -148,10 +150,11 @@
                 </tr>
             </table>
             <div id="add">
-                <button id="addButton" onclick="javascript:addItem()">Add Item</button>
+                <button type="button" id="addButton" onclick="javascript:addItem()">Add Item</button>
+                <button type="button" id="removeButton" onclick="javascript:removeItem()"> Remove Item</button>
             </div>
             <div id="submit">
-                <button id="submitButton" onclick="javascript:clickSubmit()">Submit</button>
+                <button type="button" id="submitButton" onclick="javascript:clickSubmit()">Submit</button>
             </div>
        </div> 
     </div>
