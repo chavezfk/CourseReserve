@@ -123,12 +123,24 @@
                 <th>Author </th>
                 <th>Owner</th>
                 <tr>
-                    <td ><input type="text" name="barcode1"/></td>
-                    <td ><input type="text" name="title1"/></td>
-                    <td ><input type="text" name="call_num1"/></td>
-                    <td ><input type="text" name="author1"/></td>
+                    <td ><input type="text" name="barcode"/></td>
+                    <td ><input type="text" name="title"/></td>
+                    <td ><input type="text" name="call_num"/></td>
+                    <td ><input type="text" name="author"/></td>
                     <td>
-                        <select name="owner1" onselect="javascript:checkSelection()">
+                        <select id="select" name="owner" onchange="javascript:checkSelect()">
+                            <option>Library</option>
+                            <option>Self</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><input type="text" name="barcode"/></td>
+                    <td ><input type="text" name="title"/></td>
+                    <td ><input type="text" name="call_num"/></td>
+                    <td ><input type="text" name="author"/></td>
+                    <td>
+                        <select id="select" name="owner" onchange="javascript:checkSelect()">
                             <option>Library</option>
                             <option>Self</option>
                         </select>
@@ -143,15 +155,9 @@
             </div>
        </div> 
     </div>
-<input type="submit"/>
     </form>
     
-    <script type="text/javascript">
-        function checkSelection() {
-            var select = document.getElementByID("owner_select");
-            if(select.value() === "Self")alert("No!");
-        }
-    </script>
+
 </body>
 
 </html>
