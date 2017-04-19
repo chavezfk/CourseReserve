@@ -103,12 +103,12 @@ function create_google_sheet_entry(){
         $_POST['last'],
         $_POST['first'],
         $_POST['course_num'],
-        $_POST['barcode1'],
-        $_POST['title1'],
-        $_POST['call_num1'],
-        $_POST['author1'],
+        $_POST['barcode 1'],
+        $_POST['title 1'],
+        $_POST['call_num 1'],
+        $_POST['author 1'],
         $loanTime,
-        $_POST['owner1'],
+        $_POST['owner 1'],
         
     ),
     // Additional rows ...
