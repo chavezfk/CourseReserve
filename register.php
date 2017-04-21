@@ -7,6 +7,7 @@ function read_template($filename) {
     return ob_get_clean();
 }
 
+//gets the string of the selected loan time
 function getLoanTime() {
     $names = array('2hr','4hr','12hr','2 weeks');
     foreach($names as $c){
@@ -15,6 +16,26 @@ function getLoanTime() {
         }
     }
 
+}
+
+//gets the list of items on the form
+function getValues(){
+    $values = array();
+    
+    for($c = 0; $c < $_POST['num_rows']; $c++){
+        array_push($values, array(
+            $_POST['last'],
+            $_POST['first'],
+            $_POST['course_num'],
+            $_POST['barcode'][$c],
+            $_POST['title'][$c],
+            $_POST['call_num'][$c],
+            $_POST['author'][$c],
+            getLoanTime(),
+            $_POST['owner'][$c],
+        ));
+    }
+    return $values;
 }
 
 //called if reccurence is chosen
@@ -98,7 +119,9 @@ function create_google_sheet_entry(){
     
     $loanTime = getLoanTime();
 
-    $values = array(
+    $values = getValues();
+    
+    /*$values = array(
     array(
         $_POST['last'],
         $_POST['first'],
@@ -123,7 +146,7 @@ function create_google_sheet_entry(){
         $_POST['owner'][1],
     ),
     // Additional rows ...
-    );
+    );*/
     
     $body = new Google_Service_Sheets_ValueRange(array(
       'values' => $values

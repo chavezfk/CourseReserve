@@ -23,6 +23,7 @@
         
         function addItem() {
             var row = document.createElement("tr");
+            var count = document.getElementById("num_rows");
             row.insertCell(-1).innerHTML = '<input type="text" name="barcode[]"/>';
             row.insertCell(-1).innerHTML = '<input type="text" name="title[]"/>';
             row.insertCell(-1).innerHTML = '<input type="text" name="call_num[]"/>';
@@ -30,12 +31,16 @@
             row.insertCell(-1).innerHTML = '<select id="select" name="owner[]" onchange="javascript:checkSelect()"><option>Library</option><option>Self</option></select>';
             
             document.getElementById("items").appendChild(row);
+            count.value++;
         }
         
         function removeItem() {
             var item = document.getElementById("items").lastElementChild;
-            if(item.nodeName != "TBODY")
+            var count = document.getElementById("num_rows");
+            if(item.nodeName != "TBODY"){
                 document.getElementById("items").removeChild(item);
+                count.value--;
+            }
         }
         
         //checks submission validity. must pass all or it wont work. 
@@ -255,6 +260,7 @@
             </div>
        </div> 
     </div>
+    <input type="hidden" id="num_rows" name="num_rows" value=1 >
     </form>
     
 
