@@ -34,7 +34,6 @@
         
         function removeItem() {
             var item = document.getElementById("items").lastElementChild;
-            alert(item.nodeName + " " + item.id);
             if(item.nodeName != "TBODY")
                 document.getElementById("items").removeChild(item);
         }
