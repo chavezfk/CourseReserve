@@ -37,8 +37,78 @@
             if(item.nodeName != "TBODY")
                 document.getElementById("items").removeChild(item);
         }
+        
+        //checks submission validity. must pass all or it wont work. 
         function checkSubmit() {
+            var count = 0;
+            var checkList = ["barcode[]", "title[]", "call_num[]", "author[]" ];
+            var otherList = ["first", "last", "course_num", "email"];
+            var loan_time = ["2hr", "4hr", "12hr", "2 weeks"];
+            var item;
+            var passed = true, passed_loan = true;
             
+            //general information requirements
+            document.getElementById("required-warning").style.display = "none";
+            
+            for(var i = 0; i < otherList.length; i++){
+                if(document.getElementById(otherList[i]).value === ""){
+                    document.getElementById("required-warning").style.display = "block";
+                    passed = false;
+                }
+            }
+            
+            //loan_time requirements
+            document.getElementById("loan-warning").style.display = "none";
+            
+            for(var i = 0; i < loan_time.length; i++){
+                if(document.getElementById(loan_time[i]).checked){
+                    break;
+                }
+                else{
+                    passed = false;
+                    passed_loan = false;
+                }
+            }
+            if(!passed_loan){
+                document.getElementById("loan-warning").style.display = "block";
+            }
+            
+            //item requirements
+            item = document.getElementsByName(checkList[0]);
+            document.getElementById("field-count-warning").style.display = "none";
+            
+            for(var i = 0; i < item.length; i++){
+                
+                for(var j = 0; j < checkList.length; j++){
+                    input = document.getElementsByName(checkList[j]);
+                    if(input[i].value != "")
+                        count++;
+                }
+                if(count < 2){
+                    document.getElementById("field-count-warning").style.display = "block";
+                    passed = false;
+                }
+                count = 0;
+            }
+            
+            return passed;
+        }
+        
+        //attempt to submit the form
+        function clickSubmit(){
+            if(checkSubmit()){
+                document.getElementById("form").submit();
+            }
+        }
+        
+        //handles the radio buttons not deselecting when another is clicked
+        function radioButtons(checked){
+            var buttons = ['2hr', '4hr', '12hr', '2 weeks'];
+            for(var i = 0; i < buttons.length; i++){
+                if(buttons[i] != checked){
+                    document.getElementById(buttons[i]).checked = false;
+                }
+            }
         }
     </script>
     
@@ -50,61 +120,78 @@
     </p>
     
     
-    <form method="post" action="register.php">
+    <form method="post" action="register.php" id="form" onchange="javascript:checkSubmit()">
     <div id="form" method="post" action="register.php">
-        <h4>General Information:</h4>
+        <h4>General Information: </h4>
+        <div><span style="color:red">*</span> indicates a required field</div>
         <div id="semester_year">
-            <label for="semester" class="required">Semester:</label>
+            <label for="semester" >Semester:</label>
             <select name="semester">
                 <option value="Spring">Spring</option>
                 <option value="Fall">Fall</option>
             </select>
             
-            <label for="semester" class="required">Year:</label>
+            <label for="semester" >Year:</label>
             <input type="number" name="year" id="year" value="2017"/>
         
         </div>
         <div id="general">
             <table>
                 <tr>
-                    <td><label for="name" class="required">Professor Name:</label></td>
+                    <td><label for="name" >Professor Name:</label></td>
                 </tr>
                 <tr>
-                    <td><label for="first" class="required">First:</label></td>
-                    <td><label for="last" class="required">Last:</label></td>
+                    <td><label for="first" >First:<em>*</em></span></label></td>
+                    <td><label for="last" >Last:<em>*</em></label></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="first" id="first"/></td>
                     <td><input type="text" name="last" id="last"/></td>
                 </tr>
                 <tr>
-                    <td><label for="phone" class="required">Phone:</label></td>
+                    <td><label for="phone" >Phone:</label></td>
                     <td><input type="text" name="phone" id="phone"/></td>
                 </tr>
                 <tr>
-                    <td><label for="email" class="required">Email:</label></td>
+                    <td><label for="email" >Email:<em>*</em></label></td>
                     <td><input type="text" name="email" id="email"/></td>
                 </tr>
                 <tr>
-                    <td><label for="course_num" class="required">Course #:</label></td>
+                    <td><label for="course_num" >Course #:<em>*</em></label></td>
                     <td><input type="text" name="course_num" id="course_num"/></td>
                 </tr>
                 <tr>
-                    <td><label for="course_name" class="required">Course Name:</label></td>
+                    <td><label for="course_name" >Course Name:</label></td>
                     <td><input type="text" name="course_name" id="course_name"/></td>
                 </tr>
 
             </table>
             <table>
                 <tr>
-                    <td><label for="loan_time" class="required">Loan Time: </label></td>
+                    <td><label for="loan_time">Loan Time:<em>*</em></label></td>
                 </tr>
                 <tr>
-                    <td id="loan_time">
-                        <input type="radio" class="radio" name="2hr">2HR</input>
-                        <input type="radio" class="radio" name="4hr">4HR</input>
-                        <input type="radio" class="radio" name="12hr">12HR/Overnight</input>
-                        <input type="radio" class="radio" name="2 weeks">2 Weeks</input>
+                    <td></td>
+                    <td>
+                        <input type="radio" class="radio" name="2hr" id="2hr" onclick="javascript:radioButtons('2hr')">2HR</input>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="radio" class="radio" name="4hr" id="4hr" onclick="javascript:radioButtons('4hr')">4HR</input>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="radio" class="radio" name="12hr" id="12hr" onclick="javascript:radioButtons('12hr')">12HR/Overnight</input>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="radio" class="radio" name="2 weeks" id="2 weeks" onclick="javascript:radioButtons('2 weeks')">2 Weeks</input>
                     </td>
                 </tr>
                 
@@ -152,6 +239,16 @@
                 <button type="button" id="addButton" onclick="javascript:addItem()">Add Item</button>
                 <button type="button" id="removeButton" onclick="javascript:removeItem()"> Remove Item</button>
             </div>
+            <h4 id="required-warning" style="display:none; color:red">
+                WARNING: You must fill out all required fields!
+            </h4>
+            <h4 id="loan-warning" style="display:none; color:red">
+                WARNING: You must pick a loan time length!
+            </h4>
+            <h4 id="field-count-warning" style="display:none; color:red">
+                WARNING: You must provide at least two categories per item!
+            </h4>
+            
             <div id="submit">
                 <button type="button" id="submitButton" onclick="javascript:clickSubmit()">Submit</button>
             </div>

@@ -7,6 +7,9 @@ body {
 div {
     padding-bottom: 0.25in;
 }
+label em{
+    color: red;
+}
 #form {
     width:60%;
 }
