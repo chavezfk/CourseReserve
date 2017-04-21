@@ -62,15 +62,16 @@
             
             for(var i = 0; i < loan_time.length; i++){
                 if(document.getElementById(loan_time[i]).checked){
+                    passed_loan = true;
                     break;
                 }
                 else{
-                    passed = false;
                     passed_loan = false;
                 }
             }
             if(!passed_loan){
                 document.getElementById("loan-warning").style.display = "block";
+                passed = false;
             }
             
             //item requirements
@@ -197,7 +198,7 @@
                 
             </table>
         </div>
-        <h4>Book Information: </h4>
+        <h4>Item Information: </h4>
         <p>
         If you do not know all the information, please enter at least two fields. 
         Valid examples include: title and author, title and call number, or call number and author.
