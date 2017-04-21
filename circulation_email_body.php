@@ -1,81 +1,67 @@
 <?php
 
-$needlabels = array(
-    'needsphone' => 'Phone',
-    'needscomputer' => 'Computer',
-    'needsprojector' => 'Projector',
-    'needsdvd' => 'DVD player');
-
-$repeatlabels = array(
-    "not"     => "Does Not Repeat",
-    "daily"   => "Daily",
-    "weekday" => "Every Week Day",
-    "mwf"     => "Every Monday, Wednesday and Friday",
-    "tt"      => "Every Tuesday and Thursday",
-    "weekly"  => "Weekly",
-    "monthly" => "Monthly");
-
+$loanTimeLabels = array(
+    '2hr' => '2 hours',
+    '4hr' => '4 hours',
+    '12hr' => '12 hours / overnight',
+    '2 weeks' => '2 weeks');
+    
 ?>
 
-<h2>Reservation on <?php echo $_POST['rezdate'] ?></h2>
+<h2>Reservation by <?php echo $_POST['first']. " " . $_POST['last'] ?></h2>
+    
+<h3>Class info: </h3>
+<dl>
+    <dt>Number:</dt>
+    <dd><?php echo $_POST['course_num'] ?></dd>
+    
+    <dt>Name: <dt>
+    <dd><?php echo $_POST['course_name'] ?></dd>
 
-    from <?php echo $_POST['arr_time'] ?> to <?php echo $_POST['dep_time']. "\n"  ?>
-<?php if ($_POST['recur'] != "false"): ?>
-    Recurs: <?php echo $repeatlabels[$_POST['repeats']] . "\n" ?>
-    Days:   <?php echo join(", ", array_map('ucfirst', array_keys($_POST['days']))) . "\n"; ?>
-    Until:  <?php echo $_POST['until'] . "\n" ?>
-<?php endif; ?>
+</dl>
 
 <h3>Contact Info:</h3>
 
 <dl>
-    <dt>Group</dt>
-    <dd><?php echo $_POST['group_name'] ?></dd>
 
-    <dt>Name</dt>
-    <dd><?php echo $_POST['name'] ?> &lt;<?php echo $_POST['email'] ?>&gt;</dd>
+    <dt>Email</dt>
+    <dd><?php echo $_POST['email'] ?></dd>
 
     <dt>Phone</dt>
     <dd><?php echo $_POST['phone'] ?></dd>
 </dl>
 
-    <h3>Affiliation:</h3>
 
-<dl>
-    <?php
-    if ($_POST['tech'])
-        echo "NMT\n";
-    elseif ($_POST['federal'])
-        echo "Federal Government\n";
-    elseif ($_POST['state'])
-        echo "NM State Government\n";
+<h3>Items requested:</h3>
+
+<table>
+    <th>Barcode</th>
+    <th>Title</th>
+    <th>Call <?php echo chr(35) ?></th>
+    <th>Author </th>
+    <th>Owner</th>
+    
+    <?php 
+        function getLoanTime(){
+            $names = array('2hr','4hr','12hr','2 weeks');
+            foreach($names as $c){
+                if(isset($_POST[$c])) {
+                    return $c;
+                }
+            }
+        }
+        for($c = 0; $c < $_POST['num_rows']; $c++){
+            echo "<tr>"
+            echo "<td>". $_POST['barcode'][$c] . "</td>",
+            echo "<td>". $_POST['title'][$c] . "</td>",
+            echo "<td>". $_POST['call_num'][$c] . "</td>",
+            echo "<td>". $_POST['author'][$c] . "</td>",
+            echo "<td>". getLoanTime() . "</td>",
+            echo "<td>". $_POST['owner'][$c] . "</td>",
+            echo "</tr>"
+        }
     ?>
-</dl>
+</table>
 
 
-<h3>Venue:</h3>
-
-<dl>
-
-    <dt>Room:</dt>
-    <dd><?php echo $_POST['room'] ?></dd>
-
-    <dt>Needs:</dt>
-    <dd> <ul>
-            <?php
-
-            foreach (array('needsdvd', 'needscomputer', 'needsprojector', 'needsphone') as $need)
-                if (array_key_exists($need, $_POST))
-                    if ($_POST[$need])
-                        echo "<li>". $needlabels[$need] ."</li>";
-            ?>
-        </ul>
-    </dd>
-
-
-</dl>
-
-
-    <h3>Instructions:</h3>
-        <dl><?php echo str_replace("\n", "\n        ", $_POST['instructions'])?> </dl>
-<h1> Please check the pending calendar on google and take the necessary actions to confirm or deny this request.</h1>
+<h1> Please check the sheet document on google and take the necessary actions to confirm or deny this request.</h1>

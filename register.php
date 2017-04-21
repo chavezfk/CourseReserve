@@ -56,7 +56,7 @@ function send_email_to_patron() {
     $body = read_template("patron_email_body.php");
 
     mail($_POST['email'],
-        'Skeen Library Room Reservation',
+        'Skeen Library Course Item Reservation',
         $body,
         $headers);
 }
@@ -72,7 +72,7 @@ function send_email_to_circulation() {
     $body = read_template("circulation_email_body.php");
 
     mail('nmtlib@gmail.com',
-        'Room Reservation Request',
+        'Course Reservation Request',
         $body,
         $headers);
 }
