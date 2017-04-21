@@ -138,20 +138,20 @@
             </select>
             
             <label for="semester" >Year:</label>
-            <input type="number" name="year" id="year" value="2017"/>
+            <select name="year" id="year" default="2017">
+                <option>2017</option>
+                <option>2018</option>
+            </select>
         
         </div>
         <div id="general">
             <table>
                 <tr>
-                    <td><label for="name" >Professor Name:</label></td>
-                </tr>
-                <tr>
-                    <td><label for="first" >First:<em>*</em></span></label></td>
-                    <td><label for="last" >Last:<em>*</em></label></td>
-                </tr>
-                <tr>
+                    <td><label for="first" >Instructor First Name:<em>*</em></span></label></td>
                     <td><input type="text" name="first" id="first"/></td>
+                </tr>
+                <tr>
+                    <td><label for="last" >Instructor Last Name:<em>*</em></label></td>
                     <td><input type="text" name="last" id="last"/></td>
                 </tr>
                 <tr>
