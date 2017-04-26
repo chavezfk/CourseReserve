@@ -162,10 +162,10 @@ function handle_submission() {
         create_google_sheet_entry();
 
         // then email circulation
-        //send_email_to_circulation();
+        send_email_to_circulation();
 
         // then email the patron
-        //send_email_to_patron();
+        send_email_to_patron();
     }
 
     // if the submission is not valid
