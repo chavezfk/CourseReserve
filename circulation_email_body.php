@@ -7,7 +7,9 @@ $loanTimeLabels = array(
     '2 weeks' => '2 weeks');
     
 ?>
-
+<style>
+    th, td {border: 1px solid black;}
+</style>
 <h2>Reservation by <?php echo $_POST['first']. " " . $_POST['last'] ?></h2>
     
 <h3>Class info: </h3>
@@ -43,7 +45,7 @@ $loanTimeLabels = array(
     
     <?php 
         for($c = 0; $c < $_POST['num_rows']; $c++){
-            echo "<tr style='td { border: 1px solid black;}'>".
+            echo "<tr>".
                  "<td>". $_POST['barcode'][$c] . "</td>".
                  "<td>". $_POST['title'][$c] . "</td>".
                  "<td>". $_POST['call_num'][$c] . "</td>".
