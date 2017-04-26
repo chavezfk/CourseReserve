@@ -51,14 +51,14 @@ $loanTimeLabels = array(
             }
         }
         for($c = 0; $c < $_POST['num_rows']; $c++){
-            echo "<tr>";
-            echo "<td>". $_POST['barcode'][$c] . "</td>",;
-            echo "<td>". $_POST['title'][$c] . "</td>",;
-            echo "<td>". $_POST['call_num'][$c] . "</td>",;
-            echo "<td>". $_POST['author'][$c] . "</td>",;
-            echo "<td>". getLoanTime() . "</td>",;
-            echo "<td>". $_POST['owner'][$c] . "</td>",;
-            echo "</tr>";
+            echo "<tr>".
+                 "<td>". $_POST['barcode'][$c] . "</td>".
+                 "<td>". $_POST['title'][$c] . "</td>".
+                 "<td>". $_POST['call_num'][$c] . "</td>".
+                 "<td>". $_POST['author'][$c] . "</td>".
+                 "<td>". getLoanTime() . "</td>".
+                 "<td>". $_POST['owner'][$c] . "</td>".
+                 "</tr>";
         }
     ?>
 </table>
