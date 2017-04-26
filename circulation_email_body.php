@@ -64,4 +64,4 @@ $loanTimeLabels = array(
 </table>
 
 
-<h1> Please check the sheet document on google and take the necessary actions to confirm or deny this request.</h1>
+<h1> Please check the document on google sheets and take the necessary actions to confirm or deny this request.</h1>
