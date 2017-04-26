@@ -38,13 +38,7 @@ function getValues(){
     return $values;
 }
 
-//called if reccurence is chosen
-/*function makeRecurrenceString() {
-    $days = array_map('ucfirst', array_keys($_POST['days']));
-    $word = "";
-    foreach $days as $c
-        $word = $word . c;
-}*/
+
 /**
  * Sends the actual email to the patron, confirming their submission.
  */
@@ -113,40 +107,13 @@ function create_google_sheet_entry(){
         $body, $params);
         
     //push the table information next
-    
     $range = $_POST['semester'].' '.$_POST['year'].' Reservations!H1';
     $valueInputOption = 'USER_ENTERED';
     
     $loanTime = getLoanTime();
 
+    //grab all the values from the table
     $values = getValues();
-    
-    /*$values = array(
-    array(
-        $_POST['last'],
-        $_POST['first'],
-        $_POST['course_num'],
-        $_POST['barcode'][0],
-        $_POST['title'][0],
-        $_POST['call_num'][0],
-        $_POST['author'][0],
-        $loanTime,
-        $_POST['owner'][0],
-        
-    ),
-    array(
-        $_POST['last'],
-        $_POST['first'],
-        $_POST['course_num'],
-        $_POST['barcode'][1],
-        $_POST['title'][1],
-        $_POST['call_num'][1],
-        $_POST['author'][1],
-        $loanTime,
-        $_POST['owner'][1],
-    ),
-    // Additional rows ...
-    );*/
     
     $body = new Google_Service_Sheets_ValueRange(array(
       'values' => $values
