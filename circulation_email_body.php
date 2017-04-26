@@ -41,17 +41,18 @@ $loanTimeLabels = array(
     <th>Title</th>
     <th>Call <?php echo chr(35) ?></th>
     <th>Author </th>
+    <th>Loan Time</th>
     <th>Owner</th>
     
     <?php 
         for($c = 0; $c < $_POST['num_rows']; $c++){
             echo "<tr>".
-                 "<td>". $_POST['barcode'][$c] . "</td>".
-                 "<td>". $_POST['title'][$c] . "</td>".
-                 "<td>". $_POST['call_num'][$c] . "</td>".
-                 "<td>". $_POST['author'][$c] . "</td>".
-                 "<td>". getLoanTime() . "</td>".
-                 "<td>". $_POST['owner'][$c] . "</td>".
+                 "<td style='border: 1px solid black'>". $_POST['barcode'][$c] . "</td>".
+                 "<td style='border: 1px solid black'>". $_POST['title'][$c] . "</td>".
+                 "<td style='border: 1px solid black'>". $_POST['call_num'][$c] . "</td>".
+                 "<td style='border: 1px solid black'>". $_POST['author'][$c] . "</td>".
+                 "<td style='border: 1px solid black'>". getLoanTime() . "</td>".
+                 "<td style='border: 1px solid black'>". $_POST['owner'][$c] . "</td>".
                  "</tr>";
         }
     ?>
