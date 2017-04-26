@@ -42,16 +42,8 @@ $loanTimeLabels = array(
     <th>Owner</th>
     
     <?php 
-        function getLoanTime(){
-            $names = array('2hr','4hr','12hr','2 weeks');
-            foreach($names as $c){
-                if(isset($_POST[$c])) {
-                    return $c;
-                }
-            }
-        }
         for($c = 0; $c < $_POST['num_rows']; $c++){
-            echo "<tr>".
+            echo "<tr style='td { border: 1px solid black;}'>".
                  "<td>". $_POST['barcode'][$c] . "</td>".
                  "<td>". $_POST['title'][$c] . "</td>".
                  "<td>". $_POST['call_num'][$c] . "</td>".
